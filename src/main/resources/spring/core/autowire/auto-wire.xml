@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Auto wire: no (default) -->
+	<!--<bean id="person" class="com.jemmy.spring.core.autowire.Person">-->
+		<!--<property name="book" ref="book" />-->
+	<!--</bean>-->
+
+	<!-- Auto wire: By name -->
+	<!--<bean id="person" class="com.jemmy.spring.core.autowire.Person" autowire="byName">-->
+	<!--</bean>-->
+
+	<!-- Auto wire: By type -->
+	<!--<bean id="person" class="com.jemmy.spring.core.autowire.Person" autowire="byType">-->
+	<!--</bean>-->
+
+	<!-- Auto wire: constructor -->
+	<!--<bean id="person" class="com.jemmy.spring.core.autowire.Person" autowire="constructor">-->
+	<!--</bean>-->
+
+	<!-- Auto wire: constructor (not valid since spring 3.0 -->
+	<!--<bean id="person" class="com.jemmy.spring.core.autowire.Person" autowire="autodetect">-->
+	<!--</bean>-->
+
+	<bean id="book" class="com.jemmy.spring.core.autowire.Book">
+	</bean>
+</beans>

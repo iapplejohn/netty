@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<beans>
+		<bean id="javaBean" class="com.jemmy.spring.core.beanload.JavaBean" init-method="init">
+			<property name="name" value="zhjb"></property>
+		</bean>
+		<bean id="user" class="com.jemmy.spring.core.beanload.User" init-method="init">
+			<property name="name" value="zhjb" ></property>
+		</bean>
+	</beans>
+
+</beans>
