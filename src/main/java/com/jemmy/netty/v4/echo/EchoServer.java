@@ -43,14 +43,19 @@ public class EchoServer {
             sslCtx = null;
         }
 
+        // 1. bossGroup 用于接收连接，workerGroup 用于具体的处理
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
         try {
+            // 2. 创建服务器启动引导/辅助类: ServerBootstrap
             ServerBootstrap b = new ServerBootstrap();
+            // 3. 给引导类配置两大线程组，确定了线程模型
             b.group(bossGroup, workerGroup)
+                // 4. 指定 IO 模型
              .channel(NioServerSocketChannel.class)
              .option(ChannelOption.SO_BACKLOG, 128)
+                //（非必备）打印日志
              .handler(new LoggingHandler(LogLevel.INFO))
              .childHandler(new ChannelInitializer<SocketChannel>() {
                  @Override
@@ -59,17 +64,18 @@ public class EchoServer {
                      if (sslCtx != null) {
                          p.addLast(sslCtx.newHandler(ch.alloc()));
                      }
+                     // 5. 可以自定义客户端消息的业务处理逻辑
                      p.addLast(new EchoServerHandler());
                  }
              });
 
-            // Start the server.
+            // Start the server. 6. 绑定端口，调用 sync 方法阻塞直到绑定完成
             ChannelFuture f = b.bind(PORT).sync();
 
-            // Wait until the server socket is closed.
+            // Wait until the server socket is closed. // 7. 阻塞等待直到服务器Channel 关闭
             f.channel().closeFuture().sync();
         } finally {
-            // Shut down all event loops to terminate all threads.
+            // Shut down all event loops to terminate all threads. 8. 优雅关闭相关线程组资源
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }

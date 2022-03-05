@@ -30,7 +30,10 @@ public class TimeClient {
         EventLoopGroup group = new NioEventLoopGroup();
 
         try {
+            // 创建客户端启动引导类: Bootstrap
             Bootstrap b = new Bootstrap();
+
+            // 指定线程模型
             b.group(group)
              .channel(NioSocketChannel.class)
              .option(ChannelOption.TCP_NODELAY, true)
@@ -41,10 +44,12 @@ public class TimeClient {
                  }
              });
 
+            // 尝试建立连接
             ChannelFuture f = b.connect(host, port).sync();
 
             f.channel().closeFuture().sync();
         } finally {
+            // 优雅关闭相关线程组资源
             group.shutdownGracefully();
         }
     }

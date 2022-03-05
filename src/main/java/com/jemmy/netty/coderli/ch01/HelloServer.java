@@ -56,7 +56,7 @@ public class HelloServer {
          */
         @Override
         public void channelConnected(ChannelHandlerContext ctx, ChannelStateEvent e) throws Exception {
-            System.out.println("Hello world, I am server.");
+            System.out.println("Hello world, I am server at " + System.currentTimeMillis());
         }
     }
 }

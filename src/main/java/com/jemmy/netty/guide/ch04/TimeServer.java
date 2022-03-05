@@ -29,12 +29,15 @@ import io.netty.handler.logging.LoggingHandler;
 public class TimeServer {
 
     public void bind(int port) throws InterruptedException {
-        // 配置服务端的NIO线程组
+        // 1. 配置服务端的NIO线程组: bossGroup用于接收连接，workGroup用于具体的处理
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
         try {
+            // 2. 创建服务端启动引导/辅助类: ServerBootstrap
             ServerBootstrap b = new ServerBootstrap();
+
+            // 3. 给引导类配置两大线程组，确定了线程模型
             b.group(bossGroup, workerGroup)
              .channel(NioServerSocketChannel.class)
              .option(ChannelOption.SO_BACKLOG, 1024)
@@ -46,7 +49,7 @@ public class TimeServer {
                  }
              });
 
-            // Start the server
+            // 6. Start the server
             ChannelFuture f = b.bind(port).sync();
 
             // Wait until the server socket is closed.

@@ -55,7 +55,7 @@ public class HelloClient  {
          */
         @Override
         public void channelConnected(ChannelHandlerContext ctx, ChannelStateEvent e) throws Exception {
-            System.out.println("Hello world, I am client.");
+            System.out.println("Hello world, I am client at " + System.currentTimeMillis());
         }
     }
 }
